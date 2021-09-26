@@ -1,0 +1,38 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Invoice_Item__c" extensions="InvoiceItemController">
+    <apex:include pageName="headerTemplate"/>
+	<div class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+			<apex:pageBlock >
+				<apex:pageMessages />
+			</apex:pageBlock>
+			<div class="card">
+				<div class="card-body">
+					<apex:form >
+						<apex:pageBlock title="Invoice Item" mode="new">
+								<div class="form-group">
+									<label>Name</label>
+									<apex:inputField html-placeholder="Invoice Name" styleClass="form-control" ignoreEditPermissionForRendering="true" value="{! invoice_item.Name }"/>
+								</div>
+								<div class="form-group">
+									<label>Invoice</label>
+									<apex:inputField html-placeholder="Click the search icon to pick the related invoice" styleClass="form-control" ignoreEditPermissionForRendering="true" value="{! invoice_item.Invoice__c }"/>
+								</div>
+								<div class="form-group">
+									<label>Cost</label>
+									<apex:inputField html-placeholder="Invoice cost" styleClass="form-control" ignoreEditPermissionForRendering="true" value="{! invoice_item.Cost__c }"/>
+								</div>
+								<div class="form-group">
+									<label>Description</label>
+									<apex:inputField html-placeholder="Description" styleClass="form-control" ignoreEditPermissionForRendering="true" value="{! invoice_item.Description__c }"/>
+								</div>
+									<apex:commandButton styleClass="btn btn-success" action="{! createInvoiceItem }" value="Create Invoice Item" />
+							</apex:pageBlock>
+					</apex:form>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+<apex:include pageName="footerTemplate"/>
+</apex:page>

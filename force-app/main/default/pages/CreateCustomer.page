@@ -1,0 +1,60 @@
+<apex:page docType="html-5.0" standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Customer__c" extensions="CustomerController">
+	<apex:include pageName="headerTemplate"/>
+	<div class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<apex:pageBlock >
+					<apex:pageMessages />
+				</apex:pageBlock>
+				<div class="card">
+				<div class="card-body">
+					<apex:form >
+						<apex:pageBlock title="" mode="new">
+							<h5 class="text-center">Customer Record</h5>
+							<p class="text-center">Please fill out the form below</p>
+							<hr></hr>
+							<div class="form-group">
+								<label for="customer-name">First Name <span style="color: red;">*</span></label>
+								<apex:inputField required="true" html-placeholder="First Name" styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-name" value="{! customerObject.Name }"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="customer-last-name">Last Name</label>
+								<apex:inputField styleClass="form-control" html-placeholder="Last Name" ignoreEditPermissionForRendering="true" id="customer-last-name" value="{! customerObject.Last_Name__c }"/>
+							</div>
+							
+							<div class="form-group" style="display: {!If(customerObject.Email__c != null ,'none','') }">
+								<label for="customer-email">Email <span style="color: red;">*</span></label>
+								<apex:inputField type="email" html-placeholder="Email" required="true" styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-email" value="{! customerObject.Email__c }"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="customer-phone">Phone</label>
+								<apex:inputField type="tel" styleClass="form-control" html-placeholder="Phone" ignoreEditPermissionForRendering="true" id="customer-phone" value="{! customerObject.Phone__c }"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="customer-state">State</label>
+								<apex:inputField styleClass="form-control" html-placeholder="State" ignoreEditPermissionForRendering="true" id="customer-state" value="{! customerObject.State__c }"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="customer-zip">Zip Code</label>
+								<apex:inputField styleClass="form-control" html-placeholder="Zip Code" ignoreEditPermissionForRendering="true" id="customer-zip" value="{! customerObject.Zip_Code__c }"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="customer-address">Address</label>
+								<apex:inputField styleClass="form-control" html-placeholder="Address" ignoreEditPermissionForRendering="true" id="customer-address" value="{! customerObject.Street_Address__c }"/>
+							</div>
+							
+							<apex:commandButton styleClass="btn btn-success" action="{! createCustomer }" value="Save Customer" />
+						</apex:pageBlock>
+					</apex:form>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<apex:include pageName="footerTemplate"/>
+</apex:page>

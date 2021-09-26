@@ -1,0 +1,52 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Invoice__c" extensions="InvoiceController" action="{!deleteInvoiceItem}">
+    <apex:include pageName="headerTemplate"/>
+      <div class="container py-5">
+         <div class="row justify-content-center">
+             <div class="col-12 col-md-10">
+                 	<h3>Invoice Items For: {!my_invoices[0].Name}</h3>
+					 <div class="table-responsive">
+						 <table class="table" style="display: {!If(my_invoices[0].Invoice_Items__r.size > 0 ,'','none') }">
+							 <thead class="thead-dark">
+							 <tr>
+								 <th scope="col">#</th>
+								 <th scope="col">Name</th>
+								 <th scope="col">Description</th>
+								 <th scope="col">Cost</th>
+								 <th scope="col" colspan="2">Action</th>
+							 </tr>
+							 </thead>
+							 <apex:variable value="1" var="index"/>
+							 <apex:repeat value="{!my_invoices[0].Invoice_Items__r}" var="item" id="theRepeat">
+								 <tr>
+									 <td>{!index}</td>
+									 <td>{!item.Name}</td>
+									 <td>{!item.Description__c}</td>
+									 <td>${!item.Cost__c}</td>
+									 <td>
+										<apex:outputlink styleClass="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this invoice item?');" value="/apex/InvoicesItems?item_id={!item.Id}&action=delete"><i class="fas fa-trash"></i> Delete</apex:outputlink>
+									</td>
+									<td>
+										<apex:outputlink styleClass="btn btn-sm btn-primary" value="/apex/InvoiceItem?id={!item.Id}"><i class="fas fa-edit"></i> Edit</apex:outputlink>
+									</td>
+								 </tr>
+								 <apex:variable var="index" value="{!VALUE(index) + 1}"/>
+							 </apex:repeat>    
+							 <tr>
+								 <td></td>
+								 <td></td>
+								 <td></td>
+								 <td>${!my_invoices[0].Total_Invoice_Amount__c}</td>
+							 </tr>
+						 </table>
+					 </div>
+					<div class="alert alert-primary" role="alert" style="display: {!If(my_invoices[0].Invoice_Items__r.size > 0 ,'none','') }">
+						This invoice does not have an item yet
+					</div>
+					<hr></hr>
+					<apex:outputlink styleClass="btn btn-md btn-success" value="/apex/InvoiceItem"><i class="fas fa-plus"></i> Add Invoice Item</apex:outputlink>
+             </div>
+         </div>
+        </div>
+    <apex:include pageName="footerTemplate"/>
+    
+</apex:page>

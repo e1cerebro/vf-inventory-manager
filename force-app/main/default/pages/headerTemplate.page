@@ -1,0 +1,136 @@
+<apex:page >
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"></link>    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ></link>
+	<style>
+        body > .container{
+        	min-height: 86vh;
+        }
+        
+        th, td{
+        	text-align: center;
+        }
+		.lookupInput
+        {
+            display: inline;
+            vertical-align: middle;
+            white-space: nowrap;
+             display: flex;
+            flex-flow: row;
+            width: 100%;
+            gap: 1rem;
+        }
+        
+        .lookupInput a.form-control
+        {
+        	width: 20%;
+        	border: none;
+        }
+        
+        .lookupInput input{
+			pointer-events:none;
+        }
+        
+        .lookupInput img
+        {
+            background-repeat: no-repeat;
+            margin-right: .25em;
+            vertical-align: middle;
+        }
+        .lookupInput .disabled
+        {
+            background-color: #ccc;
+        }
+        .lookupInput .emptyDependentLookup
+        {
+            font-style: italic;
+        }
+        .lookupInput input[readonly]
+        {
+            background-color: #e6e6e6;
+            border: 2px solid #e6e6e6;
+            color: #333;
+            cursor: default;
+        }
+        .lookupInput a.readOnly
+        {
+            float: right;
+        }
+        .lookupInput span.readOnly
+        {
+            display: block;
+            white-space: normal;
+        }
+        .lookupInput span.totalSummary
+        {
+            font-weight: bold;
+        }
+        .inlineEditRequiredDiv .lookupInput img,.inlineEditDiv .lookupInput img
+        {
+            vertical-align: middle;
+        }
+        .quickCreateModule .lookupInput input {
+            max-width: 155px
+        }
+        .lookupIcon {
+            background-image: url(/img/func_icons/util/lookup20.gif);
+            background-position: 0 0;
+            width: 20px;
+            height: 20px;
+            background-position: top left
+        }
+        .lookupIconOn {
+            background-image: url(/img/func_icons/util/lookup20.gif);
+            background-position: 0 0;
+            width: 20px;
+            height: 20px;
+            background-position: top right
+        }
+
+		table.messageTable {
+			padding: 0px;
+			margin: 0px;
+			background: #e1e9ff;
+			width: 100%;
+			margin-bottom: 1rem !important;
+			padding: 1rem 0.5rem !important;
+		}
+
+		table.messageTable ul{
+			list-style: none;
+			padding-bottom: 1rem;
+		}
+
+		table.messageTable h4{
+			padding-top: 1rem;
+		}
+
+		.errorMsg{
+			color: red;
+		}
+	</style>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" href="/apex/Home">Apex Inventory Manager</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainmenu">
+				<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+							<apex:outputlink styleClass="nav-link active"  value="/apex/CreateCustomer"><i class="fas fa-user-plus"></i> Create Customer</apex:outputlink>
+					</li>
+					<li class="nav-item">
+						<apex:outputlink styleClass="nav-link active"  value="/apex/ListCustomers"><i class="fas fa-users"></i> All Customers</apex:outputlink>
+					</li>
+					<li class="nav-item">
+						<apex:outputlink styleClass="nav-link active"  value="/apex/AllInvoices"><i class="fas fa-file-invoice-dollar"></i> All Invoices</apex:outputlink>
+					</li>
+					<li class="nav-item">
+						<apex:outputlink styleClass="nav-link active"  value="/apex/CreateInvoice"><i class="fas fa-plus"></i> Create Invoice</apex:outputlink>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</apex:page>

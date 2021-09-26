@@ -1,0 +1,92 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Customer__c" extensions="CustomerInvoicesController">
+    <style>
+        
+        header.page-header {
+            display: flex;
+            justify-content: center;
+            flex-flow: column;
+            text-align: center;
+            align-items: center;
+        }
+        
+         header.page-header  .menu-list {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+        }
+        
+    	#page-wrap{
+        	background-color: pink;
+        	min-height: 100vh;
+        }
+        
+        .pbButton{
+        	display: block;
+        	
+        }
+        
+        .bPageBlock .pbTitle{
+            width: 100%;
+    		display: block;
+        }
+        
+        .bPageBlock .pbTitle .mainTitle {
+            text-align: center;
+        }
+        
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+        	background-color: #dddddd;
+        }
+        
+    </style>
+   	<header class="page-header">
+    	<div class="logo">
+           <apex:outputlink value="/apex/Home">Invoice Manager</apex:outputlink>
+        </div>
+   <ul class="menu-list">
+            <li class="menu-item">
+                 <apex:outputlink value="/apex/CreateCustomer">Create User</apex:outputlink>
+            </li>
+             <li class="menu-item">
+                 <apex:outputlink value="/apex/ListCustomers">List Customers</apex:outputlink>
+            </li>
+            <li>
+                  <apex:outputlink value="/apex/CreateInvoice">Create Invoice</apex:outputlink>
+            </li>
+        </ul>
+    </header>
+    <div id="page-wrap">  
+        	<h1>Invoices For {!customers[0].Name} {!customers[0].Last_Name__c}</h1>
+	 		<table>
+                <tr>
+                    <th>Name</th>
+                    <th>Total Amount</th>
+                    <th>Created Date</th>
+                </tr>
+                <apex:repeat value="{!customers[0].Invoices__r}" var="invoice" id="theRepeat">
+                    <tr>
+                        <td>{!invoice.Name}</td>
+                        <td>{!invoice.Total_Invoice_Amount__c}</td>
+                        <td>{!invoice.start_date__c}</td>
+                        <td>
+                            <apex:form >
+                                <apex:outputlink value="/apex/InvoicesItems?id={!invoice.Id}">View Invoice Items</apex:outputlink>
+                            </apex:form>
+                        </td>
+                    </tr>
+            	</apex:repeat>          
+            </table>
+    </div>
+</apex:page>

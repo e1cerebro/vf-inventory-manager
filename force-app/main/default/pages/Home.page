@@ -1,0 +1,20 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false">
+<apex:include pageName="headerTemplate"/>
+    <div class="container pt-5">
+        <div class="row">
+                <div class="col">
+					<div class="jumbotron">
+						<h1 class="display-4">Apex Inventory Manager</h1>
+						<h3> Blackforce Salesforce Development Training </h3>
+						<p class="lead">Project 1 Working with Apex And Visualforce Pages</p>
+						<hr class="my-4"></hr>
+						<p class="lead">Developed By - Christian</p>
+						<hr class="my-4"></hr>
+						<p><apex:outputlink styleClass="btn btn-primary btn-lg"  value="/apex/ListCustomers"><i class="fas fa-users"></i> View All Customers</apex:outputlink></p>
+						<apex:outputlink styleClass="btn btn-warning btn-lg"  value="/apex/AllInvoices"><i class="fas fa-file-invoice-dollar"></i> All Invoices</apex:outputlink>
+                    </div>
+                </div>
+        </div>
+    </div>
+<apex:include pageName="footerTemplate"/>
+</apex:page>

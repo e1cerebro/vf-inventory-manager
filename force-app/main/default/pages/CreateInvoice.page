@@ -1,0 +1,40 @@
+<apex:page docType="html-5.0" standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Invoice__c"  extensions="InvoiceController">
+	<apex:include pageName="headerTemplate"/>
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+				<apex:pageBlock >
+				<apex:pageMessages />
+				</apex:pageBlock>
+					<div class="card">
+					<div class="card-body">
+						<apex:form >
+							<apex:pageBlock title="" mode="new">
+								<h3><i class="fas fa-file-invoice-dollar"></i> Invoice</h3>
+								<hr></hr>
+								<div class="form-group">
+									<label for="customer-name">Invoice Name</label>
+									<apex:inputField styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-name" value="{! invoice.Name }"/>
+								</div>
+								<div class="form-group">
+									<label for="customer-customer">Choose Customer <span style="color: red;">*</span></label>
+									<apex:inputField html-placeholder="Click the search icon to pick a customer" styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-customer" value="{! invoice.Customer__c  }"/>
+								</div>
+								<div class="form-group">
+									<label for="customer-start-date">Start Date <span style="color: red;">*</span></label>
+									<apex:inputField type="date" html-placeholder="Date formate: mm/dd/yyyy"  styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-start-date" value="{! invoice.start_date__c  }"/>
+								</div>
+								<div class="form-group">
+									<label for="customer-due-date">Due Date</label>
+									<apex:inputField type="date" html-placeholder="Date formate: mm/dd/yyyy" styleClass="form-control" ignoreEditPermissionForRendering="true" id="customer-due-date" value="{! invoice.Due_Date__c   }"/>
+								</div>
+							<apex:commandButton styleClass="btn btn-success" action="{!createInvoice}" value="Save Invoice" />
+							</apex:pageBlock>
+							</apex:form>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<apex:include pageName="footerTemplate"/>
+</apex:page>

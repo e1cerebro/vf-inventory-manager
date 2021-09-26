@@ -1,0 +1,64 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false" standardController="Customer__c" extensions="CustomerController">
+	<apex:include pageName="headerTemplate"/>
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col">
+				<div class="row">
+					<div class="col-md-4 mb-4">
+						<div class="card">
+							<div class="card-body">
+								<p>                                         
+									<apex:outputlink styleClass="btn btn-link"  value="/apex/ListCustomers"><i class="fas fa-arrow-left"></i> Back To All Customers</apex:outputlink>
+								</p>
+								<h5 class="card-title"><i class="fas fa-user"></i> {!customer_record[0].Name} {!customer_record[0].Last_Name__c}</h5>
+								<hr></hr>
+								<p class="card-text"><strong><i class="fas fa-envelope"></i></strong> {!customer_record[0].Email__c}</p>
+								<p class="card-text"><strong><i class="fas fa-phone"></i></strong> {!customer_record[0].Phone__c}</p>
+								<p class="card-text"><strong><i class="fas fa-house-user"></i></strong> {!customer_record[0].Street_Address__c} {!customer_record[0].State__c} {!customer_record[0].Zip_Code__c}</p>
+								<apex:outputlink styleClass="btn btn-success"  value="/apex/CreateInvoice"><i class="fas fa-plus"></i> Create Invoice</apex:outputlink>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<h2><i class="fas fa-id-card-alt"></i> Related Invoices</h2>
+						<div class="table-responsive">
+							<table class="table table-striped" style="display: {!If(customer_record[0].Invoices__r.size > 0 ,'','none') }">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Description</th>
+										<th scope="col">Cost</th>
+										<th scope="col" colspan="1">Action</th>
+									</tr>
+								</thead>
+								<apex:variable value="1" var="index"/>
+								<apex:repeat value="{!customer_record[0].Invoices__r}" var="invoice" id="theRepeat">
+									<tr>
+										<td>{!index}</td>
+										<td>{!invoice.Name}</td>
+										<td>
+											<apex:outputText value="{0, date, MMMM d','  yyyy}">
+												<apex:param value="{!invoice.start_date__c}" /> 
+											</apex:outputText>
+										</td>
+											<td>${!invoice.Total_Invoice_Amount__c}</td>
+										<td>
+											<apex:outputlink styleClass="btn btn-primary"  value="/apex/InvoiceDetailed?id={!invoice.Id}"><i class="fas fa-comment-dollar"></i> Invoice Items</apex:outputlink>
+										</td>
+									</tr>
+										<apex:variable var="index" value="{!VALUE(index) + 1}"/>
+								</apex:repeat>    
+							</table>
+
+							<div class="alert alert-primary" role="alert" style="display: {!If(customer_record[0].Invoices__r.size > 0 ,'none','') }">
+								Customer does not have an invoice
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<apex:include pageName="footerTemplate"/>
+</apex:page>

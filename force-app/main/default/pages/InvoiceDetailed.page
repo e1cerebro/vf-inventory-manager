@@ -1,0 +1,65 @@
+<apex:page standardStylesheets="false" sidebar="false"  showHeader="false"  standardController="Invoice__c" extensions="InvoiceController">
+<apex:include pageName="headerTemplate"/>
+
+<div class="container pt-5">
+    <div class="row">
+        	<div class="col">
+                <div class="row">
+        				<div class="col-md-4">
+                            <h2>Invoice Details</h2>
+							<p>                                         
+								<apex:outputlink styleClass="btn btn-link"  value="/apex/AllInvoices"><i class="fas fa-arrow-left"></i> Back To Invoices</apex:outputlink>
+							</p>
+                            <div class="card">
+                                  <div class="card-body">
+                                        <h5 class="card-title">{!my_invoices[0].Name}</h5>
+                                      <hr></hr>
+                                         <p class="card-text"><strong>Customer Name:</strong> {!my_invoices[0].Customer__r.Name} {!my_invoices[0].Customer__r.Last_Name__c}</p>
+                                         <p class="card-text"><strong>Email:</strong> {!my_invoices[0].Customer__r.Email__c}</p>
+                                      <hr></hr>
+                                      	<p class="card-text"><strong>Created On:</strong>
+                                            <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                <apex:param value="{!my_invoices[0].start_date__c}" /> 
+                                            </apex:outputText>
+                                      </p>
+                                     	 <p class="card-text"><strong>Due On:</strong>
+                                                 <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!my_invoices[0].Due_Date__c}" /> 
+                                                </apex:outputText>
+                                          </p>
+                                    	<p class="card-text"><strong>Total Amount:</strong> ${!my_invoices[0].Total_Invoice_Amount__c}</p>
+                                      	<apex:outputlink styleClass="btn btn-primary"  value="/apex/InvoiceItem">Add New Item</apex:outputlink>
+                                  </div>
+                            </div>
+                      </div>
+                    <div class="col-md-8">
+                        	<h2>Purchased Items</h2>
+                            <table class="table table-striped" style="display: {!If(my_invoices[0].Invoice_Items__r.size > 0 ,'','none') }">
+                                <tr>
+                                    <th>Name</th>
+                                     <th>Description</th>
+                                    <th>Cost</th>
+                                </tr>
+                                <apex:repeat value="{!my_invoices[0].Invoice_Items__r}" var="item" id="theRepeat">
+                                    <tr>
+                                        <td>{!item.Name}</td>
+                                        <td>{!item.Description__c}</td>
+                                         <td>${!item.Cost__c}</td>
+                                    </tr>
+                                </apex:repeat>    
+                                <tr>
+                                        <td></td>
+                                        <td></td>
+                                         <td>${!my_invoices[0].Total_Invoice_Amount__c}</td>
+                                    </tr>
+                            </table>
+							<div class="alert alert-primary" role="alert" style="display: {!If(my_invoices[0].Invoice_Items__r.size > 0 ,'none','') }">
+								Customer does not have an invoice
+							</div>
+                      </div>
+                </div>
+    		</div>
+    </div>
+</div>
+<apex:include pageName="footerTemplate"/>
+</apex:page>
