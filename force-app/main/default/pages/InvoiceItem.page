@@ -26,7 +26,7 @@
 									<label>Description</label>
 									<apex:inputField html-placeholder="Description" styleClass="form-control" ignoreEditPermissionForRendering="true" value="{! invoice_item.Description__c }"/>
 								</div>
-									<apex:commandButton styleClass="btn btn-success" action="{! createInvoiceItem }" value="Create Invoice Item" />
+									<apex:commandButton styleClass="btn btn-success" action="{! createInvoiceItem }" value="Save Invoice Item" />
 							</apex:pageBlock>
 					</apex:form>
 				</div>

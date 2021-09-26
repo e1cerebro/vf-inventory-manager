@@ -8,7 +8,7 @@ trigger InvoiceItemTrigger on Invoice_Item__c (after insert, after update, befor
 			//Get the Total Invoice Amount using the invoice ID
 			List<Invoice__c> invoices = [SELECT Id, Total_Invoice_Amount__c FROM Invoice__c WHERE id =: invoice_id LIMIT 1];
 
-			if(invoices){
+			if(invoices.size() == 1){
 				invoices[0].Total_Invoice_Amount__c = item_cost + invoices[0].Total_Invoice_Amount__c;
 				upsert invoices;
 			}
@@ -28,7 +28,7 @@ trigger InvoiceItemTrigger on Invoice_Item__c (after insert, after update, befor
 			List<Invoice__c> invoices = [SELECT Id, Total_Invoice_Amount__c FROM Invoice__c WHERE id =: invoice_id LIMIT 1];
 			
 			//If these values exist then we can safely manipulate the cost and upsert
-			if(invoices.size() > 0 && old_item_cost != null &&  updated_item_cost != null ){
+			if(invoices.size() == 1 && old_item_cost != null &&  updated_item_cost != null ){
 				//remove the old cost
 				invoices[0].Total_Invoice_Amount__c = invoices[0].Total_Invoice_Amount__c - old_item_cost;
 				//add the new cost
@@ -50,7 +50,7 @@ trigger InvoiceItemTrigger on Invoice_Item__c (after insert, after update, befor
 			List<Invoice__c> invoices = [SELECT Id, Total_Invoice_Amount__c FROM Invoice__c WHERE id =: invoice_id LIMIT 1];
 			
 			//If these values exist then we can safely manipulate the cost and upsert
-			if(invoices.size() > 0 && item_cost != null ){
+			if(invoices.size() == 1 && item_cost != null ){
 				//remove the old cost
 				invoices[0].Total_Invoice_Amount__c = invoices[0].Total_Invoice_Amount__c - item_cost;
 				upsert invoices;

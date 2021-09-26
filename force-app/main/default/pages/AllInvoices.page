@@ -6,7 +6,7 @@
 					<h2>All Invoices</h2>
 					<hr></hr>
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table" style="display: {!If(all_invoices.size > 0 ,'','none') }">
 							<thead class="thead-dark">
 								<tr>
 									<th scope="col">#</th>
@@ -48,6 +48,9 @@
 								</apex:repeat>   
 							</tbody>
 						</table>
+						<div class="alert alert-primary" role="alert" style="display: {!If(all_invoices.size > 0 ,'none','') }">
+							No invoice record was found
+						</div> 
 					</div>
 					<hr></hr>
 					<apex:outputlink styleClass="btn btn-md btn-success" value="/apex/CreateInvoice"><i class="fas fa-plus"></i> Make New Invoice</apex:outputlink>
