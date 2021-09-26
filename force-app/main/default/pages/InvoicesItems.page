@@ -3,6 +3,9 @@
       <div class="container py-5">
          <div class="row justify-content-center">
              <div class="col-12 col-md-10">
+					<p>                                         
+						<apex:outputlink styleClass="btn btn-link"  value="/apex/AllInvoices"><i class="fas fa-arrow-left"></i> Back To Invoices</apex:outputlink>
+					</p>
                  	<h3>Invoice Items For: {!my_invoices[0].Name}</h3>
 					 <div class="table-responsive">
 						 <table class="table" style="display: {!If(my_invoices[0].Invoice_Items__r.size > 0 ,'','none') }">
